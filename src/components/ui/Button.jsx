@@ -9,7 +9,7 @@ const Button = ({
     icon = false,
     ...props
 }) => {
-    const baseStyles = "inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-medium transition-all duration-300 transform active:scale-95";
+    const baseStyles = "inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-medium transition-all duration-300 transform active:scale-95 cursor-pointer";
 
     const variants = {
         primary: "bg-primary text-white hover:bg-primary/90 shadow-lg shadow-primary/20 hover:shadow-primary/30",
@@ -21,7 +21,7 @@ const Button = ({
     const content = (
         <>
             {children}
-            {icon && <ArrowRight className="w-4 h-4" />}
+            {icon && <ArrowRight size={18} />}
         </>
     );
 

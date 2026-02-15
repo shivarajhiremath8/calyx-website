@@ -1,119 +1,155 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Atom } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
+import logo from '../../assets/logo.png';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const [isVisible, setIsVisible] = useState(true);
+    const [lastScrollY, setLastScrollY] = useState(0);
     const location = useLocation();
 
+    // Scroll handler for hiding/showing navbar
     useEffect(() => {
         const handleScroll = () => {
-            setScrolled(window.scrollY > 20);
+            const currentScrollY = window.scrollY;
+
+            // Show/Hide logic
+            if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                setIsVisible(false); // Scrolling down
+            } else {
+                setIsVisible(true); // Scrolling up
+            }
+
+            setLastScrollY(currentScrollY);
+            setScrolled(currentScrollY > 20);
         };
+
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+    }, [lastScrollY]);
 
     // Close mobile menu on route change
     useEffect(() => {
         setIsOpen(false);
     }, [location]);
 
+    // Prevent scrolling when mobile menu is open
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [isOpen]);
+
     const navLinks = [
         { name: 'Home', path: '/' },
         { name: 'About Us', path: '/about' },
         { name: 'Products', path: '/products' },
         { name: 'Services', path: '/services' },
-        { name: 'Contact', path: '/contact' },
+        { name: 'Contact Us', path: '/contact' },
     ];
 
     return (
-        <nav
-            className={`fixed w-full z-50 transition-all duration-300 ${scrolled
-                    ? 'bg-white/80 backdrop-blur-md shadow-sm py-4'
-                    : 'bg-transparent py-6'
-                }`}
-        >
-            <div className="container mx-auto px-6 flex justify-between items-center">
-                {/* Logo */}
-                <Link to="/" className="flex items-center gap-2 group">
-                    <div className="p-2 bg-primary/5 rounded-lg group-hover:bg-primary/10 transition-colors">
-                        <Atom className="w-6 h-6 text-primary" />
-                    </div>
-                    <span className="text-xl font-bold text-primary tracking-tight">
-                        CALYX
-                        <span className="text-accent font-light">COMMODITIES</span>
-                    </span>
-                </Link>
-
-                {/* Desktop Navigation */}
-                <div className="hidden md:flex items-center gap-8">
-                    {navLinks.map((link) => (
-                        <Link
-                            key={link.path}
-                            to={link.path}
-                            className={`text-sm font-medium transition-colors hover:text-accent relative group ${location.pathname === link.path ? 'text-primary' : 'text-secondary'
-                                }`}
-                        >
-                            {link.name}
-                            <span
-                                className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full ${location.pathname === link.path ? 'w-full' : ''
-                                    }`}
-                            />
-                        </Link>
-                    ))}
-                    <Link
-                        to="/contact"
-                        className="px-5 py-2.5 bg-primary text-white text-sm font-medium rounded-full hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 hover:shadow-primary/30"
-                    >
-                        Get in Touch
-                    </Link>
-                </div>
-
-                {/* Mobile Menu Button */}
-                <button
-                    className="md:hidden text-primary p-2"
-                    onClick={() => setIsOpen(!isOpen)}
+        <>
+            <div
+                className={`fixed top-0 left-0 right-0 z-50 flex justify-center md:px-4 md:pt-6 transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full md:-translate-y-[200%]'
+                    }`}
+            >
+                <nav
+                    className={`w-full md:w-auto transition-all duration-300 md:rounded-full border-b md:border border-white/20 shadow-sm ${scrolled || isOpen
+                        ? 'bg-white/95 backdrop-blur-md shadow-md py-3 px-6 md:px-8 md:py-4'
+                        : 'bg-white/80 backdrop-blur-md py-3 px-6 md:px-8 md:py-4'
+                        }`}
                 >
-                    {isOpen ? <X /> : <Menu />}
-                </button>
-            </div>
+                    <div className="flex items-center justify-between gap-6 md:gap-12 w-full max-w-7xl mx-auto">
+                        {/* Logo - Increased size */}
+                        <Link to="/" className="flex items-center shrink-0 z-50 relative">
+                            <img src={logo} alt="Calyx Logo" className="h-12 md:h-14 w-auto object-contain" />
+                        </Link>
 
-            {/* Mobile Navigation */}
-            <AnimatePresence>
-                {isOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="md:hidden bg-white border-t border-gray-100 overflow-hidden"
-                    >
-                        <div className="flex flex-col p-6 gap-4">
+                        {/* Desktop Navigation */}
+                        <div className="hidden md:flex items-center gap-8">
                             {navLinks.map((link) => (
                                 <Link
                                     key={link.path}
                                     to={link.path}
-                                    className={`text-lg font-medium ${location.pathname === link.path
-                                            ? 'text-primary'
-                                            : 'text-secondary'
+                                    className={`text-base font-medium transition-colors relative group ${location.pathname === link.path ? 'text-accent' : 'text-primary hover:text-accent'
                                         }`}
                                 >
                                     {link.name}
+                                    <span
+                                        className={`absolute -bottom-1 left-0 h-0.5 bg-accent transition-all duration-300 ${location.pathname === link.path ? 'w-full' : 'w-0 group-hover:w-full'
+                                            }`}
+                                    />
                                 </Link>
                             ))}
-                            <Link
-                                to="/contact"
-                                className="mt-2 w-full py-3 bg-primary text-white text-center rounded-lg font-medium"
-                            >
+                        </div>
+
+                        {/* Right Action */}
+                        <div className="hidden md:block">
+                            <Link to="/contact" className="bg-primary text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-accent transition-colors shadow-md">
                                 Get in Touch
                             </Link>
                         </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </nav>
+
+                        {/* Mobile Menu Button */}
+                        <button
+                            className="md:hidden text-primary ml-auto z-50 relative p-2"
+                            onClick={() => setIsOpen(!isOpen)}
+                            aria-label="Toggle Menu"
+                        >
+                            {isOpen ? <X size={32} /> : <Menu size={32} />}
+                        </button>
+                    </div>
+                </nav>
+            </div>
+
+            {/* Mobile Navigation Overlay - Full Screen */}
+            <div
+                className={`fixed inset-0 z-40 bg-white/98 backdrop-blur-xl transition-all duration-300 md:hidden ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+                    }`}
+            >
+                <div className="flex flex-col items-center justify-center h-full gap-8 p-6">
+                    {navLinks.map((link, idx) => (
+                        <Link
+                            key={link.path}
+                            to={link.path}
+                            className={`text-2xl font-bold transition-all duration-300 ${location.pathname === link.path ? 'text-accent' : 'text-primary'
+                                }`}
+                            style={{
+                                opacity: isOpen ? 1 : 0,
+                                transform: isOpen ? 'translateY(0)' : 'translateY(20px)',
+                                transitionDelay: `${idx * 100}ms`
+                            }}
+                            onClick={() => setIsOpen(false)}
+                        >
+                            {link.name}
+                        </Link>
+                    ))}
+                    <div
+                        style={{
+                            opacity: isOpen ? 1 : 0,
+                            transform: isOpen ? 'translateY(0)' : 'translateY(20px)',
+                            transitionDelay: `${navLinks.length * 100}ms`
+                        }}
+                    >
+                        <Link
+                            to="/contact"
+                            className="bg-primary text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-accent transition-colors shadow-lg mt-4 inline-block"
+                            onClick={() => setIsOpen(false)}
+                        >
+                            Get in Touch
+                        </Link>
+                    </div>
+                </div>
+            </div>
+        </>
     );
 };
 

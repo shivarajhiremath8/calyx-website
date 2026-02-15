@@ -1,14 +1,17 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
-// Placeholder Pages
-const Home = () => <div className="p-10 text-3xl font-bold text-accent">Home Page (Ready to Build)</div>;
+import Layout from './components/layout/Layout';
+import Home from './pages/Home';
+import Contact from './pages/Contact';
 
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-      </Routes>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </Layout>
     </Router>
   );
 }

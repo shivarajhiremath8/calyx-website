@@ -1,121 +1,121 @@
-import { motion } from 'framer-motion';
-import { Mail, MapPin, Phone, Send } from 'lucide-react';
 import Button from '../components/ui/Button';
 
 const Contact = () => {
     return (
-        <div className="flex flex-col">
-            {/* Header */}
-            <section className="bg-primary text-white py-20">
-                <div className="container mx-auto px-6 text-center">
-                    <motion.h1
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="text-4xl md:text-5xl font-bold mb-6"
-                    >
-                        Get in Touch
-                    </motion.h1>
-                    <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-                        Have a question or want to partner with us? We'd love to hear from you.
-                    </p>
-                </div>
-            </section>
+        <div className="min-h-screen pt-28 md:pt-44 pb-16 bg-white">
+            <div className="container mx-auto px-6 md:px-12 lg:px-20">
+                <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
 
-            <section className="py-20 bg-slate-50">
-                <div className="container mx-auto px-6">
-                    <div className="bg-white rounded-3xl shadow-xl overflow-hidden grid md:grid-cols-2">
-                        {/* Contact Info */}
-                        <div className="bg-slate-900 p-12 text-white flex flex-col justify-between relative overflow-hidden">
-                            <div className="absolute top-0 right-0 w-64 h-64 bg-accent/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+                    {/* Left Side: Text & Info */}
+                    <div className="pt-2 animate-fade-in-up">
+                        <span className="text-accent font-bold uppercase tracking-widest text-xs mb-3 block">Get In Touch</span>
+                        <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-primary mb-6 leading-tight tracking-tight">
+                            Let's Start a<br />Conversation
+                        </h1>
+                        <p className="text-secondary text-base md:text-lg mb-10 leading-relaxed max-w-lg">
+                            Have a question or interested in our commodities? We're here to help. Reach out to us and we'll respond as soon as possible.
+                        </p>
 
-                            <div className="relative z-10 space-y-12">
-                                <div>
-                                    <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
-                                    <p className="text-gray-400 leading-relaxed">
-                                        Fill out the form and our team will get back to you within 24 hours.
-                                    </p>
-                                </div>
-
-                                <div className="space-y-6">
-                                    <div className="flex items-start gap-4">
-                                        <MapPin className="w-6 h-6 text-accent shrink-0" />
-                                        <div>
-                                            <h4 className="font-semibold mb-1">Our Location</h4>
-                                            <p className="text-gray-400 text-sm">123 Innovation Drive, Tech Park,<br />Sector 4, City, State 123456</p>
-                                        </div>
+                        <div className="space-y-8">
+                            {/* Info Items - Enhanced UI */}
+                            {[
+                                {
+                                    icon: "M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
+                                    label: "Email Us",
+                                    text: "info@calyxcommodities.com",
+                                    href: "mailto:info@calyxcommodities.com"
+                                },
+                                {
+                                    icon: "M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z",
+                                    label: "Call Us",
+                                    text: "+91 98801 22758",
+                                    href: "tel:+919880122758"
+                                },
+                                {
+                                    icon: "M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z",
+                                    label: "Visit Us",
+                                    text: "Sri Lakshmi Complex, Opp KSRTC Bus Stand, Arakalagudu, Hassan 573102",
+                                    isAddress: true
+                                }
+                            ].map((item, idx) => (
+                                <div key={idx} className="flex items-start gap-5 group">
+                                    <div className="w-12 h-12 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white group-hover:shadow-md transition-all duration-300 shrink-0">
+                                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={item.icon} />
+                                        </svg>
                                     </div>
-
-                                    <div className="flex items-center gap-4">
-                                        <Phone className="w-6 h-6 text-accent shrink-0" />
-                                        <div>
-                                            <h4 className="font-semibold mb-1">Phone Number</h4>
-                                            <p className="text-gray-400 text-sm">+91 123 456 7890</p>
-                                        </div>
-                                    </div>
-
-                                    <div className="flex items-center gap-4">
-                                        <Mail className="w-6 h-6 text-accent shrink-0" />
-                                        <div>
-                                            <h4 className="font-semibold mb-1">Email Address</h4>
-                                            <p className="text-gray-400 text-sm">info@calyxcommodities.com</p>
-                                        </div>
+                                    <div>
+                                        <h4 className="font-bold text-primary text-lg mb-0.5">{item.label}</h4>
+                                        {item.isAddress ? (
+                                            <p className="text-secondary text-sm leading-relaxed max-w-xs">{item.text}</p>
+                                        ) : (
+                                            <a href={item.href} className="text-secondary text-base hover:text-accent transition-colors font-medium relative inline-block after:content-[''] after:absolute after:-bottom-0.5 after:left-0 after:w-0 after:h-px after:bg-accent after:transition-all after:duration-300 hover:after:w-full">
+                                                {item.text}
+                                            </a>
+                                        )}
                                     </div>
                                 </div>
-                            </div>
-
-                            <div className="relative z-10 mt-12">
-                                <div className="flex gap-4">
-                                    {/* Social Icons Placeholder */}
-                                    <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-accent transition-colors cursor-pointer">
-                                        <span className="sr-only">LinkedIn</span>
-                                        <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" /></svg>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Form */}
-                        <div className="p-12">
-                            <form className="space-y-6">
-                                <div className="grid md:grid-cols-2 gap-6">
-                                    <div className="space-y-2">
-                                        <label className="text-sm font-medium text-secondary">First Name</label>
-                                        <input type="text" className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all" placeholder="John" />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <label className="text-sm font-medium text-secondary">Last Name</label>
-                                        <input type="text" className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all" placeholder="Doe" />
-                                    </div>
-                                </div>
-
-                                <div className="space-y-2">
-                                    <label className="text-sm font-medium text-secondary">Email Address</label>
-                                    <input type="email" className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all" placeholder="john@example.com" />
-                                </div>
-
-                                <div className="space-y-2">
-                                    <label className="text-sm font-medium text-secondary">Subject</label>
-                                    <select className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all bg-white">
-                                        <option>General Inquiry</option>
-                                        <option>Partnership Proposal</option>
-                                        <option>Product Information</option>
-                                        <option>Other</option>
-                                    </select>
-                                </div>
-
-                                <div className="space-y-2">
-                                    <label className="text-sm font-medium text-secondary">Message</label>
-                                    <textarea rows="4" className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all resize-none" placeholder="Tell us how we can help..." />
-                                </div>
-
-                                <Button className="w-full" icon>Send Message</Button>
-                            </form>
+                            ))}
                         </div>
                     </div>
+
+                    {/* Right Side: Form - Enhanced UI */}
+                    <div className="bg-white p-6 md:p-8 lg:p-10 rounded-[1.5rem] shadow-[0_8px_30px_-8px_rgba(0,0,0,0.05)] border border-gray-100 relative">
+                        {/* Decorative Background Element */}
+                        <div className="absolute top-0 right-0 w-24 h-24 bg-blue-50/50 rounded-bl-[3rem] rounded-tr-[1.5rem] -z-10" />
+
+                        <form className="space-y-6">
+                            <div className="grid md:grid-cols-2 gap-6">
+                                <div className="space-y-2 group">
+                                    <label htmlFor="name" className="text-[10px] font-bold text-secondary uppercase tracking-widest ml-1 transition-colors group-focus-within:text-accent">Name</label>
+                                    <input
+                                        type="text"
+                                        id="name"
+                                        className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-100 focus:bg-white focus:border-accent focus:ring-4 focus:ring-accent/10 outline-none transition-all placeholder:text-gray-400 text-sm font-medium"
+                                        placeholder="Enter your full name"
+                                    />
+                                </div>
+                                <div className="space-y-2 group">
+                                    <label htmlFor="email" className="text-[10px] font-bold text-secondary uppercase tracking-widest ml-1 transition-colors group-focus-within:text-accent">Email</label>
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-100 focus:bg-white focus:border-accent focus:ring-4 focus:ring-accent/10 outline-none transition-all placeholder:text-gray-400 text-sm font-medium"
+                                        placeholder="hello@example.com"
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="space-y-2 group">
+                                <label htmlFor="subject" className="text-[10px] font-bold text-secondary uppercase tracking-widest ml-1 transition-colors group-focus-within:text-accent">Subject</label>
+                                <input
+                                    type="text"
+                                    id="subject"
+                                    className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-100 focus:bg-white focus:border-accent focus:ring-4 focus:ring-accent/10 outline-none transition-all placeholder:text-gray-400 text-sm font-medium"
+                                    placeholder="What is this regarding?"
+                                />
+                            </div>
+
+                            <div className="space-y-2 group">
+                                <label htmlFor="message" className="text-[10px] font-bold text-secondary uppercase tracking-widest ml-1 transition-colors group-focus-within:text-accent">Message</label>
+                                <textarea
+                                    id="message"
+                                    rows="4"
+                                    className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-100 focus:bg-white focus:border-accent focus:ring-4 focus:ring-accent/10 outline-none transition-all resize-none placeholder:text-gray-400 text-sm font-medium"
+                                    placeholder="Write your message here..."
+                                ></textarea>
+                            </div>
+
+                            <Button className="w-full py-4 text-base font-bold shadow-lg hover:shadow-accent/40 hover:-translate-y-0.5">
+                                Send Message
+                            </Button>
+                        </form>
+                    </div>
                 </div>
-            </section>
+            </div>
         </div>
     );
 };
+
 
 export default Contact;

@@ -1,101 +1,128 @@
-import { Link } from 'react-router-dom';
-import { Atom, Mail, MapPin, Phone, Linkedin, Twitter, Facebook } from 'lucide-react';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { ArrowUpRight, Facebook, Instagram, Linkedin, Twitter } from 'lucide-react';
+import logo from '../../assets/logo.png';
 
 const Footer = () => {
-    const currentYear = new Date().getFullYear();
+
+    const socialLinks = [
+        { name: 'Facebook', url: "#", icon: Facebook },
+        { name: 'Linkedin', url: "#", icon: Linkedin },
+        { name: 'Twitter', url: "#", icon: Twitter },
+        { name: 'Instagram', url: "#", icon: Instagram }
+    ];
+
+    const navLinks = [
+        { name: 'Home', href: '/' },
+        { name: 'Products', href: '/products' },
+        { name: 'Services', href: '/services' },
+        { name: 'About Us', href: '/about' },
+        { name: 'Contact', href: '/contact' }
+    ];
 
     return (
-        <footer className="bg-primary text-white pt-16 pb-8">
-            <div className="container mx-auto px-6">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-                    {/* Brand Info */}
-                    <div className="space-y-4">
-                        <Link to="/" className="flex items-center gap-2">
-                            <div className="p-2 bg-white/10 rounded-lg">
-                                <Atom className="w-6 h-6 text-accent" />
-                            </div>
-                            <span className="text-xl font-bold tracking-tight">
-                                CALYX
-                                <span className="text-accent font-light">COMMODITIES</span>
-                            </span>
-                        </Link>
-                        <p className="text-gray-400 text-sm leading-relaxed">
-                            Pioneering research and development in sustainable commodities.
-                            Bridging the gap between scientific innovation and market application.
+        <footer className="relative w-full bg-white text-primary pt-24 pb-10 overflow-hidden pointer-events-auto border-t border-gray-100">
+
+            <div className="container mx-auto px-6 md:px-12 relative z-10">
+
+                {/* --- TOP SECTION: Brand, Links & Contact --- */}
+                <div className="flex flex-col md:flex-row justify-between gap-12 mb-12">
+
+                    {/* Left: Brand & Description */}
+                    <div className="flex flex-col space-y-6 max-w-sm">
+                        <div className="flex items-center gap-2">
+                            <img src={logo} alt="Calyx Logo" className="h-12 w-auto object-contain" />
+                        </div>
+                        <p className="text-secondary text-base leading-relaxed">
+                            Delivering excellence in every grain. Your trusted partner for premium quality spices and agricultural commodities.
                         </p>
                     </div>
 
-                    {/* Quick Links */}
-                    <div>
-                        <h3 className="text-lg font-semibold mb-6">Quick Links</h3>
-                        <ul className="space-y-3">
-                            {[
-                                { name: 'About Us', path: '/about' },
-                                { name: 'Our Products', path: '/products' },
-                                { name: 'Services', path: '/services' },
-                                { name: 'Contact Us', path: '/contact' },
-                            ].map((link) => (
-                                <li key={link.name}>
-                                    <Link
-                                        to={link.path}
-                                        className="text-gray-400 hover:text-white transition-colors text-sm"
-                                    >
-                                        {link.name}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
+                    {/* Middle: Navigation Columns */}
+                    <div className="flex flex-col space-y-8 md:space-y-0 md:flex-row md:gap-16">
 
-                    {/* Contact Info */}
-                    <div>
-                        <h3 className="text-lg font-semibold mb-6">Contact Us</h3>
-                        <ul className="space-y-4">
-                            <li className="flex items-start gap-3 text-gray-400 text-sm">
-                                <MapPin className="w-5 h-5 text-accent shrink-0 mt-0.5" />
-                                <span>123 Innovation Drive,<br />Tech Park, Sector 4<br />City, State 123456</span>
-                            </li>
-                            <li className="flex items-center gap-3 text-gray-400 text-sm">
-                                <Phone className="w-5 h-5 text-accent shrink-0" />
-                                <span>+91 123 456 7890</span>
-                            </li>
-                            <li className="flex items-center gap-3 text-gray-400 text-sm">
-                                <Mail className="w-5 h-5 text-accent shrink-0" />
-                                <span>info@calyxcommodities.com</span>
-                            </li>
-                        </ul>
-                    </div>
-
-                    {/* Newsletter / Social */}
-                    <div>
-                        <h3 className="text-lg font-semibold mb-6">Stay Connected</h3>
-                        <p className="text-gray-400 text-sm mb-4">
-                            Follow our journey and latest updates.
-                        </p>
-                        <div className="flex gap-4">
-                            {[Linkedin, Twitter, Facebook].map((Icon, idx) => (
+                        {/* Explore Column */}
+                        <div className="flex flex-col space-y-4">
+                            <h4 className="text-sm font-bold text-primary uppercase tracking-widest mb-6">Explore</h4>
+                            {navLinks.map((item) => (
                                 <a
-                                    key={idx}
-                                    href="#"
-                                    className="p-2 bg-white/5 rounded-full hover:bg-accent hover:text-white transition-all text-gray-400"
+                                    key={item.name}
+                                    href={item.href}
+                                    className="text-sm md:text-base text-secondary hover:text-accent transition-colors flex items-center gap-2 group"
                                 >
-                                    <Icon className="w-5 h-5" />
+                                    {item.name}
+                                    <ArrowUpRight size={12} className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-accent" />
+                                </a>
+                            ))}
+                        </div>
+
+                        {/* Legal Column */}
+                        <div className="flex flex-col space-y-4">
+                            <h4 className="text-sm font-bold text-primary uppercase tracking-widest mb-6">Legal</h4>
+                            {['Privacy Policy', 'Terms of Service', 'Cookie Policy'].map((item) => (
+                                <a key={item} href="#" className="text-sm md:text-base text-secondary hover:text-accent transition-colors">
+                                    {item}
                                 </a>
                             ))}
                         </div>
                     </div>
+
+                    {/* Right: Contact Information */}
+                    <div className="max-w-md w-full md:text-right flex flex-col md:items-end">
+                        <h4 className="text-sm font-bold text-primary uppercase tracking-widest mb-6">
+                            Contact
+                        </h4>
+                        <div className="flex flex-col gap-2 text-base mb-6 text-secondary">
+                            <a href="mailto:info@calyxcommodities.com" className="hover:text-accent transition-colors">info@calyxcommodities.com</a>
+                            <a href="tel:+919880122758" className="hover:text-accent transition-colors">+91 98801 22758</a>
+                        </div>
+                        <address className="not-italic text-secondary leading-relaxed text-sm">
+                            Sri Lakshmi Complex,<br />
+                            Opp KSRTC Bus Stand,<br />
+                            Arakalagudu, Hassan 573102<br />
+                            Karnataka, India
+                        </address>
+                    </div>
+
                 </div>
 
-                <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-                    <p className="text-gray-500 text-sm">
-                        © {currentYear} Calyx Commodities. All rights reserved.
-                    </p>
-                    <div className="flex gap-6 text-sm text-gray-500">
-                        <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
-                        <Link to="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
+                {/* --- MIDDLE SECTION: MASSIVE BRAND NAME --- */}
+                <div className="w-full border-t border-gray-100 pt-8 pb-12 flex justify-center items-center overflow-hidden">
+                    <motion.h1
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                        className="text-[10vw] md:text-[8vw] font-black tracking-tighter leading-none text-transparent bg-clip-text bg-gradient-to-b from-sky-700 to-emerald-700 pointer-events-none select-none pr-4 md:pr-8 scale-y-110"
+                    >
+                        CALYX COMMODITIES
+                    </motion.h1>
+                </div>
+
+                {/* --- BOTTOM SECTION: Socials & Copyright --- */}
+                <div className="flex flex-col md:flex-row items-center justify-between gap-6 pt-10 border-t border-gray-100">
+                    <div className="text-xs text-secondary font-mono uppercase">
+                        © {new Date().getFullYear()} CALYX COMMODITIES. ALL RIGHTS RESERVED.
+                    </div>
+
+                    <div className="flex items-center gap-6">
+                        {socialLinks.map((social, i) => (
+                            <a
+                                key={i}
+                                href={social.url}
+                                className="text-secondary hover:text-accent transition-colors p-2 hover:bg-green-50 rounded-full border border-gray-200"
+                            >
+                                <social.icon size={20} />
+                            </a>
+                        ))}
                     </div>
                 </div>
+
             </div>
+
+            {/* Background Grid Accent */}
+            <div className="absolute inset-x-0 bottom-0 h-96 bg-gradient-to-t from-green-50/50 to-transparent pointer-events-none" />
+
         </footer>
     );
 };

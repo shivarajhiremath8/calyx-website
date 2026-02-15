@@ -45,7 +45,7 @@ const Home = () => {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        transition={{ duration: 1.5 }} // Slower transition for smoothness
+                        transition={{ duration: 0.8 }} // Faster transition
                         className="absolute inset-0"
                     >
                         <div
@@ -57,14 +57,7 @@ const Home = () => {
 
                         <div className="absolute inset-0 flex items-center justify-center text-center text-white px-6">
                             <div className="max-w-5xl space-y-8">
-                                <motion.span
-                                    initial={{ y: 20, opacity: 0 }}
-                                    animate={{ y: 0, opacity: 1 }}
-                                    transition={{ delay: 0.1, duration: 0.8 }}
-                                    className="inline-block px-6 py-2 border border-white/30 rounded-full bg-black/20 backdrop-blur-sm text-sm md:text-base font-medium uppercase tracking-widest"
-                                >
-                                    Welcome to Calyx Commodities
-                                </motion.span>
+                                {/* "Welcome to Calyx Commodities" Removed as requested */}
 
                                 <motion.h1
                                     initial={{ y: 30, opacity: 0 }}

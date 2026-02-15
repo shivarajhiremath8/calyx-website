@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #0f172a;
+  /* Deep Navy/Blue */
+  --color-secondary: #334155;
+  /* Slate */
+  --color-accent: #059669;
+  /* Green shade for "Green, Blue, White" theme */
+  --color-background: #ffffff;
+  /* White */
+  --color-surface: #f8fafc;
+  /* Very light cool grey */
+
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-background);
+    color: var(--color-primary);
+    font-family: var(--font-sans);
+  }
+}

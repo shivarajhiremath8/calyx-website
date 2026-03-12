@@ -27,21 +27,21 @@ const Intro = ({ onComplete }) => {
 
     return (
         <motion.div
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-black" // Solid background to prevent "dark filter" look on site
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-[#0f172a]"
             initial={{ y: 0 }}
-            exit={{ y: '-100%', transition: { duration: 2.5, ease: [0.22, 1, 0.36, 1] } }} // Ultra-smooth custom bezier (easeOutQuint-ish)
+            exit={{ y: '-100%', transition: { duration: 1.5, ease: [0.22, 1, 0.36, 1] } }}
         >
             <div className="relative z-10 text-center px-6">
                 <motion.div
-                    initial={{ opacity: 0, scale: 0.9, filter: 'blur(10px)' }}
-                    animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-                    transition={{ duration: 1.2, ease: "easeOut" }}
-                    className="space-y-6"
+                    initial={{ opacity: 0, y: 30, filter: 'blur(10px)' }}
+                    animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                    transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }} // Expop scale in
+                    className="space-y-4 md:space-y-6 flex flex-col items-center justify-center"
                 >
-                    <h1 className="text-4xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-white to-blue-200 tracking-tight animate-gradient-x pb-4"> {/* Added pb-4 for descenders */}
+                    <h1 className="text-fluid-h1 font-bold text-white tracking-tight pb-2">
                         Welcome to Calyx
                     </h1>
-                    <p className="text-lg md:text-2xl text-blue-100/90 font-light tracking-[0.2em] uppercase">
+                    <p className="text-fluid-p text-gray-300 font-light tracking-[0.15em] uppercase">
                         Premium Quality Agricultural Commodities
                     </p>
                 </motion.div>

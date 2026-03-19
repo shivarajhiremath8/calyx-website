@@ -15,7 +15,6 @@ const Footer = () => {
     const navLinks = [
         { name: 'Home', href: '/' },
         { name: 'Products', href: '/products' },
-        { name: 'Services', href: '/services' },
         { name: 'About Us', href: '/about' },
         { name: 'Contact', href: '/contact' }
     ];

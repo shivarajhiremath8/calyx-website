@@ -51,7 +51,6 @@ const Navbar = () => {
         { name: 'Home', path: '/' },
         { name: 'About Us', path: '/about' },
         { name: 'Products', path: '/products' },
-        { name: 'Services', path: '/services' },
         { name: 'Contact Us', path: '/contact' },
     ];
 
@@ -91,13 +90,6 @@ const Navbar = () => {
                             ))}
                         </div>
 
-                        {/* Right Action */}
-                        <div className="hidden md:block">
-                            <Link to="/contact" className="bg-primary text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-accent transition-colors shadow-md">
-                                Get in Touch
-                            </Link>
-                        </div>
-
                         {/* Mobile Menu Button */}
                         <button
                             className="md:hidden text-primary ml-auto z-50 relative p-2"
@@ -132,21 +124,6 @@ const Navbar = () => {
                             {link.name}
                         </Link>
                     ))}
-                    <div
-                        style={{
-                            opacity: isOpen ? 1 : 0,
-                            transform: isOpen ? 'translateY(0)' : 'translateY(20px)',
-                            transitionDelay: `${navLinks.length * 100}ms`
-                        }}
-                    >
-                        <Link
-                            to="/contact"
-                            className="bg-primary text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-accent transition-colors shadow-lg mt-4 inline-block"
-                            onClick={() => setIsOpen(false)}
-                        >
-                            Get in Touch
-                        </Link>
-                    </div>
                 </div>
             </div>
         </>
